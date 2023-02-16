@@ -33,6 +33,14 @@ namespace AddressLine
             services.AddTransient<IAddressBL, AddressBL>();
             services.AddTransient<IAddressRL, AddressRL>();
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                name: "AllowOrigin",
+              builder => {
+                  builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+              });
+            });
 
         }
 
@@ -49,7 +57,10 @@ namespace AddressLine
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Address");
             });
             app.UseHttpsRedirection();
+            app.UseCors("AllowOrigin");
 
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseRouting();
 
             app.UseAuthorization();

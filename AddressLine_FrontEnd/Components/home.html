@@ -2,11 +2,11 @@
     <div class="formtag">
         <form>
             <div class="form-control">
-                <input type="text" ng-model="addressline1" placeholder="Enter Address">
+                <input type="text" ng-model="addressline" placeholder="Enter Address">
             </div>
             <div class="form-control1 flexdiv">
                 <div>
-                    <input type="text" ng-model="pincode" placeholder="Enter Pincode">
+                    <input type="number" ng-model="pincode" placeholder="Enter Pincode">
                 </div>
                 <div>
                     <input type="text" ng-model="city" placeholder="Enter City">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div>
-            <button type="submit" name="submit" ng-click="insert(addressline1)">Split and Save</button>
+            <button type="submit" name="submit" ng-click="InsertDetails(addressline,pincode,city,district,state,country)">Split and Save</button>
            </div>
         </form>
     </div>
@@ -30,7 +30,7 @@
 
 <div class="fetcheddata" ng-controller="homeCtrl">   
    <div>
-    <p>Addresline1:</p>
+    <p>Addresline1:{{addressline1}}</p>
     <p>Addresline2:</p>
     <p>Addresline3:</p>
     <p>Pincode:</p>
