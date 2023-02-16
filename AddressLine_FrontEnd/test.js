@@ -4,17 +4,17 @@ let addr = ["","","","",""];
 
 for(let i = 0; i < 5 && longAddr.length > 0; i++){
 
-    if(longAddr.length < 35 || i == 4)
+    if(longAddr.length < 31 || i == 4)
     {
         addr[i] = longAddr;
         break;
     }
     
-    let cut = 35;
+    let cut = 28;
     while(longAddr[cut] !== " " && cut > 0)
         cut--;
     if(cut == 0) //word longer than 35 chars here
-      cut = 35;
+      cut = 28;
     
     addr[i] = longAddr.slice(0, cut);
     longAddr = longAddr.slice(cut + 1);

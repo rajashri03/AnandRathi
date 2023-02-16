@@ -1,4 +1,5 @@
 ﻿using CommonLayer.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using RepositoryLayer.Interfaces;
@@ -31,7 +32,9 @@ namespace RepositoryLayer.Services
                     sqlCommand.CommandType = System.Data.CommandType.Text;
 
                     sqlConnection.Open();
-                    sqlCommand.Parameters.AddWithValue("AddressLine1", DbType.String).Value=address.AddressLine1;
+
+                    AddressModel model = new AddressModel();
+                    sqlCommand.Parameters.AddWithValue("AddressLine1", DbType.String).Value= address.AddressLine1;
                     sqlCommand.Parameters.AddWithValue("AddressLine2", DbType.String).Value= address.AddressLine2;
                     sqlCommand.Parameters.AddWithValue("AddressLine3", DbType.String).Value= address.AddressLine3;
                     sqlCommand.Parameters.AddWithValue("Pincode", DbType.Int64).Value=address.Pincode;

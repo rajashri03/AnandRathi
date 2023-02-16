@@ -3,7 +3,9 @@
         <form>
             <div class="form-control">
                 <input type="text" ng-model="addressline" placeholder="Enter Address">
+                <span style="color:red">{{errormsg}}</span>
             </div>
+           
             <div class="form-control1 flexdiv">
                 <div>
                     <input type="number" ng-model="pincode" placeholder="Enter Pincode">
