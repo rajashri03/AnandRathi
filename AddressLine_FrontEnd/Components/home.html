@@ -1,4 +1,7 @@
-<div class="container" ng-controller="homeCtrl">   
+
+<div ng-controller="homeCtrl" ng-init="Getall()">
+
+<div class="container" >   
     <div class="formtag">
         <form>
             <div class="form-control">
@@ -30,15 +33,19 @@
     </div>
 </div>
 
-<div class="fetcheddata" ng-controller="homeCtrl">   
+<div class="fetcheddata">   
    <div>
-    <p>Addresline1:{{addressline1}}</p>
-    <p>Addresline2:</p>
-    <p>Addresline3:</p>
-    <p>Pincode:</p>
-    <p>City:</p>
-    <p>District:</p>
-    <p>State:</p>
-    <p>Country:</p>
+    <p>Addresline1:{{newdata.addressLine1}}</p>
+    <p>Addresline2:{{newdata.addressLine2}}</p>
+    <p>Addresline3:{{newdata.addressLine3}}</p>
+    <p>Pincode:{{newdata.pincode}}</p>
+    <p>City:{{newdata.city}}</p>
+    <p>District:{{newdata.district}}</p>
+    <p>State:{{newdata.state}}</p>
+    <p>Country:{{newdata.country}}</p>
    </div>
+</div>
+<div class="fetcheddata" ng-repeat="data in addressdata" >
+{{data.addressLine1}} {{data.addressLine2}} {{data.addressLine3}}  {{data.pinCode}} 
+</div>
 </div>

@@ -2,6 +2,9 @@
 using CommonLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
+using RepositoryLayer.Services;
 
 namespace AddressLine.Controllers
 {
@@ -20,7 +23,7 @@ namespace AddressLine.Controllers
             try
             {
                 var address = addressbl.AddAddress(model);
-                if (address!=null)
+                if (address != null)
                 {
                     return this.Ok(new { Success = true, message = "Added successfully", Data = address });
                 }
@@ -33,6 +36,18 @@ namespace AddressLine.Controllers
             {
 
                 return this.BadRequest(new { Success = false, message = e.Message });
+            }
+        }
+        [HttpGet("AllAddress")]
+        public IEnumerable<GetAddressModel> GetAllAddress()
+        {
+            try
+            {
+                return addressbl.GetAllAddress();
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

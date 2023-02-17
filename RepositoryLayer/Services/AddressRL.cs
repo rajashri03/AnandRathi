@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace RepositoryLayer.Services
@@ -59,5 +61,61 @@ namespace RepositoryLayer.Services
                 }
             }
         }
+        public IEnumerable<GetAddressModel> GetAllAddress()
+        {
+            sqlConnection = new NpgsqlConnection(ConnString);
+            List<GetAddressModel> getAddressModels = new List<GetAddressModel>();
+            using (sqlConnection)
+            {
+                try
+                {
+                    NpgsqlCommand sqlCommand = new NpgsqlCommand("select * from addressinformation;", sqlConnection);
+                    sqlConnection.Open();
+                    NpgsqlDataReader reader = sqlCommand.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            getAddressModels.Add(new GetAddressModel()
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                addressLine1 = reader["addressline1"].ToString(),
+                                addressLine2 = reader["addressline2"].ToString(),
+                                addressLine3 = reader["addressline3"].ToString(),
+                                city = reader["city"].ToString(),
+                                district = reader["district"].ToString(),
+                                state = reader["state"].ToString(),
+                                country = reader["country"].ToString(),
+                                pinCode = Convert.ToInt32(reader["pincode"])
+                            });
+                        }
+                        return getAddressModels;
+                    }
+                    return null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+
+            }
+        }
+    }
+
+    public class GetAddressModel
+    {
+        public int ID { get; set; }
+        public string addressLine1 { get; set; }
+        public string addressLine2 { get; set; }
+        public string addressLine3 { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
+        public string state { get; set; }
+        public string country { get; set; }
+        public int pinCode { get; set; }
     }
 }
